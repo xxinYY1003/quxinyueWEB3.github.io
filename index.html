@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>京购 - 请先登录/注册</title>
+    <!-- 引入本地原生CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- ===================== 前置登录/注册页面（初始显示） ===================== -->
+    <div id="loginRegisterPage" class="login-register-page">
+        <div class="login-register-container">
+            <!-- 左侧背景图 - 路径：img/1.png -->
+            <div class="login-left">
+                <img src="img/1.png" alt="京购登录" class="login-bg-img">
+            </div>
+            <!-- 右侧表单区域 -->
+            <div class="login-right">
+                <!-- 标题切换 -->
+                <div class="tab-switch">
+                    <button id="loginTab" class="tab-btn tab-btn-active">登录</button>
+                    <button id="registerTab" class="tab-btn">注册</button>
+                </div>
+
+                <!-- 登录表单 -->
+                <form id="loginForm" class="form login-form">
+                    <div class="form-item">
+                        <label for="loginAccount" class="form-label">账号/手机号</label>
+                        <input type="text" id="loginAccount" class="form-input" placeholder="请输入账号或手机号">
+                        <p id="loginAccountTip" class="form-tip hidden">账号不能为空</p>
+                    </div>
+                    <div class="form-item">
+                        <label for="loginPwd" class="form-label">密码</label>
+                        <input type="password" id="loginPwd" class="form-input" placeholder="请输入6-16位密码">
+                        <p id="loginPwdTip" class="form-tip hidden">密码不能为空（至少6位）</p>
+                    </div>
+                    <!-- 记住密码 & 忘记密码 -->
+                    <div class="form-row">
+                        <label class="checkbox-label">
+                            <input type="checkbox" class="form-checkbox">
+                            <span class="checkbox-text">记住我</span>
+                        </label>
+                        <a href="#" class="forgot-pwd">忘记密码？</a>
+                    </div>
+                    <!-- 登录按钮 -->
+                    <button type="submit" class="form-btn">立即登录</button>
+                </form>
+
+                <!-- 注册表单（初始隐藏） -->
+                <form id="registerForm" class="form register-form hidden">
+                    <div class="form-item">
+                        <label for="regAccount" class="form-label">账号/手机号</label>
+                        <input type="text" id="regAccount" class="form-input" placeholder="请设置账号或输入手机号">
+                        <p id="regAccountTip" class="form-tip hidden">账号不能为空</p>
+                    </div>
+                    <div class="form-item">
+                        <label for="regPwd" class="form-label">设置密码</label>
+                        <input type="password" id="regPwd" class="form-input" placeholder="请设置6-16位密码">
+                        <p id="regPwdTip" class="form-tip hidden">密码不能为空（至少6位）</p>
+                    </div>
+                    <div class="form-item">
+                        <label for="regPwdConfirm" class="form-label">确认密码</label>
+                        <input type="password" id="regPwdConfirm" class="form-input" placeholder="请再次输入密码">
+                        <p id="regPwdConfirmTip" class="form-tip hidden">两次密码不一致</p>
+                    </div>
+                    <!-- 注册按钮 -->
+                    <button type="submit" class="form-btn">立即注册</button>
+                </form>
+
+                <!-- 底部logo -->
+                <div class="login-logo">
+                    <h2 class="logo-text">京购</h2>
+                    <p class="logo-desc">多快好省 · 品质保障</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== 购物主页面（初始隐藏） ===================== -->
+    <div id="shopPage" class="hidden">
+        <!-- 1. 快捷导航栏（顶部） -->
+        <div class="quick-nav">
+            <div class="container">
+                <!-- 左侧导航 -->
+                <div class="quick-nav-left">
+                    <div id="userInfo" class="user-info">
+                        <span class="welcome-text">欢迎，<span id="userName" class="user-name"></span></span>
+                        <a id="logoutBtn" href="#" class="logout-btn">退出登录</a>
+                    </div>
+                    <a href="#" class="quick-nav-link">我的订单</a>
+                    <a href="#" class="quick-nav-link">我的京购</a>
+                </div>
+                <!-- 右侧导航 -->
+                <div class="quick-nav-right">
+                    <a href="#" class="quick-nav-link">手机京购</a>
+                    <a href="#" class="quick-nav-link">客户服务</a>
+                    <a href="#" class="quick-nav-link">网站导航</a>
+                    <a href="#" class="quick-nav-link">京购会员</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. 头部（Logo + 搜索 + 购物车） -->
+        <header class="header">
+            <div class="container">
+                <!-- Logo -->
+                <div class="header-logo">
+                    <a href="#" class="logo-link">
+                        <h1 class="logo-text">京购</h1>
+                        <p class="logo-desc">多快好省 · 品质保障</p>
+                    </a>
+                </div>
+                <!-- 搜索框 -->
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="手机、电脑、家电、服饰...">
+                    <button class="search-btn">
+                        <i class="icon icon-search"></i>
+                    </button>
+                </div>
+                <!-- 购物车 -->
+                <div class="cart-box">
+                    <a href="#" class="cart-link">
+                        <i class="icon icon-cart"></i>
+                        <span class="cart-text">我的购物车</span>
+                        <span class="cart-badge">3</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!-- 3. 主导航栏 -->
+        <nav class="main-nav">
+            <div class="container">
+                <!-- 全部分类 -->
+                <div class="all-categories">
+                    <a href="#" class="categories-link">全部分类</a>
+                </div>
+                <!-- 导航选项 -->
+                <div class="nav-list">
+                    <a href="#" class="nav-link">首页</a>
+                    <a href="#" class="nav-link">家电专区</a>
+                    <a href="#" class="nav-link">手机数码</a>
+                    <a href="#" class="nav-link">电脑办公</a>
+                    <a href="#" class="nav-link">服饰鞋包</a>
+                    <a href="#" class="nav-link">生鲜食品</a>
+                    <a href="#" class="nav-link">家居家装</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- 4. 轮播图 + 侧边分类 -->
+        <section class="banner-section">
+            <div class="container">
+                <!-- 侧边分类 -->
+                <div class="side-categories">
+                    <ul class="side-cat-list">
+                        <li class="side-cat-item">
+                            <a href="#" class="side-cat-link">
+                                <span>家电</span>
+                                <i class="icon icon-arrow-right"></i>
+                            </a>
+                        </li>
+                        <li class="side-cat-item">
+                            <a href="#" class="side-cat-link">
+                                <span>手机</span>
+                                <i class="icon icon-arrow-right"></i>
+                            </a>
+                        </li>
+                        <li class="side-cat-item">
+                            <a href="#" class="side-cat-link">
+                                <span>电脑</span>
+                                <i class="icon icon-arrow-right"></i>
+                            </a>
+                        </li>
+                        <li class="side-cat-item">
+                            <a href="#" class="side-cat-link">
+                                <span>数码</span>
+                                <i class="icon icon-arrow-right"></i>
+                            </a>
+                        </li>
+                        <li class="side-cat-item">
+                            <a href="#" class="side-cat-link">
+                                <span>服饰</span>
+                                <i class="icon icon-arrow-right"></i>
+                            </a>
+                        </li>
+                        <li class="side-cat-item">
+                            <a href="#" class="side-cat-link">
+                                <span>食品</span>
+                                <i class="icon icon-arrow-right"></i>
+                            </a>
+                        </li>
+                        <li class="side-cat-item">
+                            <a href="#" class="side-cat-link">
+                                <span>家居</span>
+                                <i class="icon icon-arrow-right"></i>
+                            </a>
+                        </li>
+                        <li class="side-cat-item">
+                            <a href="#" class="side-cat-link">
+                                <span>美妆</span>
+                                <i class="icon icon-arrow-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 轮播图 - 路径：img/2.png、img/3.png、img/4.png -->
+                <div class="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="img/2.png" alt="轮播图1" class="carousel-img">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="img/3.png" alt="轮播图2" class="carousel-img">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="img/4.png" alt="轮播图3" class="carousel-img">
+                        </div>
+                    </div>
+                    <!-- 轮播指示器 -->
+                    <div class="carousel-indicators">
+                        <button class="indicator active"></button>
+                        <button class="indicator"></button>
+                        <button class="indicator"></button>
+                    </div>
+                    <!-- 轮播左右箭头 -->
+                    <button class="carousel-btn prev-btn">
+                        <i class="icon icon-arrow-left"></i>
+                    </button>
+                    <button class="carousel-btn next-btn">
+                        <i class="icon icon-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 秒杀专区（图片路径：img/5.png - img/10.png） -->
+        <section class="seckill-section">
+            <div class="container">
+                <div class="seckill-box">
+                    <!-- 秒杀标题 -->
+                    <div class="seckill-header">
+                        <div class="seckill-title">
+                            <span class="title-text">限时秒杀</span>
+                            <span class="time-text">剩余时间：</span>
+                            <div class="countdown">
+                                <span class="countdown-item">08</span>
+                                <span>:</span>
+                                <span class="countdown-item">30</span>
+                                <span>:</span>
+                                <span class="countdown-item">45</span>
+                            </div>
+                        </div>
+                        <a href="#" class="more-link">查看全部 <i class="icon icon-arrow-right"></i></a>
+                    </div>
+                    <!-- 秒杀商品 -->
+                    <div class="seckill-goods">
+                        <!-- 商品1：智能手机 - 路径：img/5.png -->
+                        <div class="goods-card" data-goods='{
+                            "id": 1,
+                            "img": "img/5.png",
+                            "title": "智能手机 高清拍照 大电池 长续航 骁龙8Gen2 12GB+256GB 全网通5G",
+                            "price": 1299,
+                            "originPrice": 1599,
+                            "sales": "2.3万+",
+                            "desc": "这款智能手机搭载骁龙8Gen2处理器，性能强劲流畅不卡顿；配备6400万像素高清主摄，拍照清晰自然；5000mAh大容量电池，支持66W快充，续航无忧；12GB+256GB大存储，满足多APP同时运行和海量文件存储需求；全网通5G，信号稳定，上网速度快。"
+                        }' id="goods1">
+                            <div class="goods-content">
+                                <img src="img/5.png" alt="智能手机" class="goods-img">
+                                <p class="goods-title">智能手机 高清拍照 大电池 长续航</p>
+                                <p class="goods-price">¥1299</p>
+                                <p class="goods-origin-price">¥1599</p>
+                            </div>
+                        </div>
+                        <!-- 商品2：笔记本电脑 - 路径：img/6.png -->
+                        <div class="goods-card" data-goods='{
+                            "id": 2,
+                            "img": "img/6.png",
+                            "title": "笔记本电脑 轻薄便携 办公学习专用 酷睿i5 16GB+512GB 14英寸高清屏",
+                            "price": 3999,
+                            "originPrice": 4599,
+                            "sales": "1.8万+",
+                            "desc": "该笔记本电脑采用酷睿i5处理器，办公学习流畅高效；16GB+512GB高速固态硬盘，启动速度快，存储容量充足；14英寸高清IPS屏，色彩鲜艳，护眼模式保护视力；机身轻薄便携，重量仅1.5kg，方便携带外出；内置长效电池，续航可达8小时，满足移动办公需求。"
+                        }' id="goods2">
+                            <div class="goods-content">
+                                <img src="img/6.png" alt="笔记本电脑" class="goods-img">
+                                <p class="goods-title">笔记本电脑 轻薄便携 办公学习专用</p>
+                                <p class="goods-price">¥3999</p>
+                                <p class="goods-origin-price">¥4599</p>
+                            </div>
+                        </div>
+                        <!-- 商品3：无线蓝牙耳机 - 路径：img/7.png -->
+                        <div class="goods-card" data-goods='{
+                            "id": 3,
+                            "img": "img/7.png",
+                            "title": "无线蓝牙耳机 降噪 超长续航 半入耳式 运动防水 高清通话",
+                            "price": 199,
+                            "originPrice": 299,
+                            "sales": "5.6万+",
+                            "desc": "这款无线蓝牙耳机采用主动降噪技术，有效隔绝环境噪音，享受纯净音乐；半入耳式设计，佩戴舒适不胀痛，长时间佩戴无压力；单次续航8小时，充电仓可提供32小时总续航，无需频繁充电；IPX4防水等级，运动出汗不怕损坏；高清通话麦克风，通话清晰无杂音，支持触控操作，使用便捷。"
+                        }' id="goods3">
+                            <div class="goods-content">
+                                <img src="img/7.png" alt="无线蓝牙耳机" class="goods-img">
+                                <p class="goods-title">无线蓝牙耳机 降噪 超长续航</p>
+                                <p class="goods-price">¥199</p>
+                                <p class="goods-origin-price">¥299</p>
+                            </div>
+                        </div>
+                        <!-- 商品4：智能手表 - 路径：img/8.png -->
+                        <div class="goods-card" data-goods='{
+                            "id": 4,
+                            "img": "img/8.png",
+                            "title": "智能手表 心率监测 运动计步 血氧检测 睡眠监测 蓝牙通话 防水",
+                            "price": 299,
+                            "originPrice": 399,
+                            "sales": "3.2万+",
+                            "desc": "该智能手表支持24小时心率监测，实时掌握健康状况；精准运动计步，记录运动数据，支持多种运动模式；血氧检测和睡眠监测，全面了解身体状态；蓝牙通话功能，无需手机即可接打电话，方便快捷；IP67防水等级，日常洗手、淋雨无需取下；续航可达7天，充电便捷。"
+                        }' id="goods4">
+                            <div class="goods-content">
+                                <img src="img/8.png" alt="智能手表" class="goods-img">
+                                <p class="goods-title">智能手表 心率监测 运动计步</p>
+                                <p class="goods-price">¥299</p>
+                                <p class="goods-origin-price">¥399</p>
+                            </div>
+                        </div>
+                        <!-- 商品5：纯棉T恤 - 路径：img/9.png -->
+                        <div class="goods-card" data-goods='{
+                            "id": 5,
+                            "img": "img/9.png",
+                            "title": "纯棉T恤 宽松百搭 多色可选 夏季透气 圆领短袖 男女同款",
+                            "price": 59,
+                            "originPrice": 99,
+                            "sales": "10万+",
+                            "desc": "这款T恤采用100%纯棉面料，柔软亲肤，透气吸汗，夏季穿着舒适不闷热；宽松版型设计，不挑身材，男女同款，百搭各种下装；圆领经典款式，简约大气；多种颜色可选，满足不同穿搭需求；做工精细，不易变形，不易褪色，经久耐穿。"
+                        }' id="goods5">
+                            <div class="goods-content">
+                                <img src="img/9.png" alt="纯棉T恤" class="goods-img">
+                                <p class="goods-title">纯棉T恤 宽松百搭 多色可选</p>
+                                <p class="goods-price">¥59</p>
+                                <p class="goods-origin-price">¥99</p>
+                            </div>
+                        </div>
+                        <!-- 商品6：休闲运动鞋 - 路径：img/10.png -->
+                        <div class="goods-card" data-goods='{
+                            "id": 6,
+                            "img": "img/10.png",
+                            "title": "休闲运动鞋 防滑耐磨 透气舒适 轻便减震 低帮百搭 男女情侣款",
+                            "price": 169,
+                            "originPrice": 239,
+                            "sales": "7.8万+",
+                            "desc": "这款休闲运动鞋采用透气网面材质，鞋面透气不闷脚，夏季穿着清爽；鞋底采用橡胶材质，防滑耐磨，抓地力强；轻便减震设计，走路舒适不累脚；低帮款式，百搭各种服饰，男女情侣款可选；做工精致，款式时尚，适合日常出行、运动健身等多种场景。"
+                        }' id="goods6">
+                            <div class="goods-content">
+                                <img src="img/10.png" alt="休闲运动鞋" class="goods-img">
+                                <p class="goods-title">休闲运动鞋 防滑耐磨 透气舒适</p>
+                                <p class="goods-price">¥169</p>
+                                <p class="goods-origin-price">¥239</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. 家电专区（图片路径：img/11.png - img/14.png） -->
+        <section class="home-appliance-section">
+            <div class="container">
+                <div class="appliance-box">
+                    <!-- 专区标题 -->
+                    <div class="appliance-header">
+                        <h2 class="appliance-title">家电专区</h2>
+                        <a href="#" class="more-link">更多商品 <i class="icon icon-arrow-right"></i></a>
+                    </div>
+                    <!-- 家电商品 -->
+                    <div class="appliance-goods">
+                        <!-- 商品1：双开门冰箱 - 路径：img/11.png -->
+                        <div class="goods-card" data-goods='{
+                            "id": 7,
+                            "img": "img/11.png",
+                            "title": "双开门冰箱 大容量 风冷无霜 节能静音 600L 智能温控 嵌入式",
+                            "price": 2999,
+                            "originPrice": 3699,
+                            "sales": "2000+",
+                            "desc": "这款双开门冰箱拥有600L超大容量，轻松容纳全家一周食材；风冷无霜技术，无需手动除霜，食材保鲜更持久；一级能效，节能省电，运行时静音无噪音；智能温控系统，精准控制箱内温度，食材新鲜不流失；嵌入式设计，节省空间，与家装完美融合。"
+                        }' id="goods7">
+                            <div class="goods-content">
+                                <img src="img/11.png" alt="双开门冰箱" class="appliance-img">
+                                <p class="goods-title">双开门冰箱 大容量 风冷无霜 节能静音</p>
+                                <p class="goods-price">¥2999</p>
+                                <div class="goods-tag-box">
+                                    <span class="goods-tag">热销</span>
+                                    <span class="goods-sales">已售2000+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 商品2：全自动洗衣机 - 路径：img/12.png -->
+                        <div class="goods-card" data-goods='{
+                            "id": 8,
+                            "img": "img/12.png",
+                            "title": "全自动洗衣机 10公斤 变频 高温除菌 滚筒 节能静音 智能投放",
+                            "price": 1999,
+                            "originPrice": 2599,
+                            "sales": "1500+",
+                            "desc": "该全自动洗衣机拥有10公斤大容量，轻松洗涤全家衣物；变频电机，节能省电，运行稳定静音；高温除菌功能，有效杀灭衣物上的细菌螨虫，呵护家人健康；滚筒设计，磨损小，衣物更柔顺；智能投放洗衣液，精准控制用量，省时省力；多种洗涤模式，满足不同衣物清洗需求。"
+                        }' id="goods8">
+                            <div class="goods-content">
+                                <img src="img/12.png" alt="全自动洗衣机" class="appliance-img">
+                                <p class="goods-title">全自动洗衣机 10公斤 变频 高温除菌</p>
+                                <p class="goods-price">¥1999</p>
+                                <div class="goods-tag-box">
+                                    <span class="goods-tag">热销</span>
+                                    <span class="goods-sales">已售1500+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 商品3：55英寸液晶电视 - 路径：img/13.png -->
+                        <div class="goods-card" data-goods='{
+                            "id": 9,
+                            "img": "img/13.png",
+                            "title": "55英寸4K超高清 智能网络 语音控制 全面屏 护眼 液晶电视",
+                            "price": 2499,
+                            "originPrice": 3199,
+                            "sales": "1800+",
+                            "desc": "这款55英寸电视采用4K超高清分辨率，画面清晰细腻，色彩鲜艳逼真；全面屏设计，视野开阔，观影沉浸感强；智能网络系统，支持海量影视资源在线观看；语音控制功能，无需遥控器，动口即可操作；护眼模式，减少蓝光伤害，保护视力；内置高品质音响，音质清晰震撼。"
+                        }' id="goods9">
+                            <div class="goods-content">
+                                <img src="img/13.png" alt="55英寸液晶电视" class="appliance-img">
+                                <p class="goods-title">55英寸4K超高清 智能网络 语音控制电视</p>
+                                <p class="goods-price">¥2499</p>
+                                <div class="goods-tag-box">
+                                    <span class="goods-tag">热销</span>
+                                    <span class="goods-sales">已售1800+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 商品4：1.5匹壁挂式空调 - 路径：img/14.png -->
+                        <div class="goods-card" data-goods='{
+                            "id": 10,
+                            "img": "img/14.png",
+                            "title": "1.5匹 一级能效 变频冷暖 壁挂式空调 自清洁 静音 智能控温",
+                            "price": 2699,
+                            "originPrice": 3299,
+                            "sales": "2200+",
+                            "desc": "该1.5匹空调采用一级能效，节能省电，长期使用更划算；变频冷暖技术，快速制冷制热，温度稳定舒适；壁挂式设计，节省空间，安装方便；自清洁功能，自动清洁蒸发器，吹出洁净空气；运行时静音无噪音，不影响休息；智能控温，精准调节温度，呵护家人健康。"
+                        }' id="goods10">
+                            <div class="goods-content">
+                                <img src="img/14.png" alt="1.5匹壁挂式空调" class="appliance-img">
+                                <p class="goods-title">1.5匹 一级能效 变频冷暖 壁挂式空调</p>
+                                <p class="goods-price">¥2699</p>
+                                <div class="goods-tag-box">
+                                    <span class="goods-tag">热销</span>
+                                    <span class="goods-sales">已售2200+</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. 底部信息 -->
+        <footer class="footer">
+            <!-- 服务保障 -->
+            <div class="footer-service">
+                <div class="container">
+                    <div class="service-list">
+                        <div class="service-item">
+                            <i class="icon icon-truck"></i>
+                            <p class="service-text">次日达</p>
+                        </div>
+                        <div class="service-item">
+                            <i class="icon icon-shield"></i>
+                            <p class="service-text">品质保障</p>
+                        </div>
+                        <div class="service-item">
+                            <i class="icon icon-refresh"></i>
+                            <p class="service-text">7天无理由退换</p>
+                        </div>
+                        <div class="service-item">
+                            <i class="icon icon-phone"></i>
+                            <p class="service-text">24小时客服</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 帮助中心 -->
+            <div class="footer-help">
+                <div class="container">
+                    <div class="help-list">
+                        <div class="help-item">
+                            <h3 class="help-title">购物指南</h3>
+                            <ul class="help-link-list">
+                                <li><a href="#" class="help-link">购物流程</a></li>
+                                <li><a href="#" class="help-link">支付方式</a></li>
+                                <li><a href="#" class="help-link">配送说明</a></li>
+                            </ul>
+                        </div>
+                        <div class="help-item">
+                            <h3 class="help-title">售后服务</h3>
+                            <ul class="help-link-list">
+                                <li><a href="#" class="help-link">售后政策</a></li>
+                                <li><a href="#" class="help-link">退款说明</a></li>
+                                <li><a href="#" class="help-link">订单取消</a></li>
+                            </ul>
+                        </div>
+                        <div class="help-item">
+                            <h3 class="help-title">关于我们</h3>
+                            <ul class="help-link-list">
+                                <li><a href="#" class="help-link">公司简介</a></li>
+                                <li><a href="#" class="help-link">联系我们</a></li>
+                                <li><a href="#" class="help-link">招贤纳士</a></li>
+                            </ul>
+                        </div>
+                        <div class="help-item">
+                            <h3 class="help-title">商家服务</h3>
+                            <ul class="help-link-list">
+                                <li><a href="#" class="help-link">商家入驻</a></li>
+                                <li><a href="#" class="help-link">商家中心</a></li>
+                                <li><a href="#" class="help-link">运营指南</a></li>
+                            </ul>
+                        </div>
+                        <div class="help-item">
+                            <h3 class="help-title">客服热线</h3>
+                            <p class="phone-num">400-123-4567</p>
+                            <p class="work-time">工作时间：9:00-21:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 版权信息 -->
+            <div class="footer-copyright">
+                <div class="container">
+                    <p class="copyright-text">© 2025 京购 版权所有 | 营业执照 | 增值电信业务经营许可证</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ===================== 商品详情弹窗（初始隐藏，已简化） ===================== -->
+    <div id="goodsDetailModal" class="modal detail-modal hidden">
+        <div class="modal-content detail-content">
+            <!-- 弹窗头部 -->
+            <div class="modal-header">
+                <h3 class="modal-title">商品详情</h3>
+                <button id="closeDetailModal" class="close-modal-btn">
+                    <i class="icon icon-close"></i>
+                </button>
+            </div>
+            <!-- 商品详情内容 -->
+            <div class="modal-body">
+                <div class="detail-wrap">
+                    <!-- 商品详情图 -->
+                    <div class="detail-img-box">
+                        <img id="detailImg" src="" alt="商品详情图" class="detail-img">
+                    </div>
+                    <!-- 商品信息 -->
+                    <div class="detail-info">
+                        <h4 id="detailTitle" class="info-title"></h4>
+                        <div class="price-box">
+                            <span id="detailPrice" class="current-price"></span>
+                            <span id="detailOriginPrice" class="origin-price"></span>
+                            <span id="detailSales" class="sales-tag"></span>
+                        </div>
+                        <!-- 加入购物车按钮 -->
+                        <div class="cart-btn-box">
+                            <button id="addCartBtn" class="add-cart-btn">
+                                <i class="icon icon-cart"></i>
+                                <span>加入购物车</span>
+                            </button>
+                        </div>
+                        <!-- 商品描述 -->
+                        <div class="desc-box">
+                            <p class="desc-title">商品介绍：</p>
+                            <p id="detailDesc" class="desc-content"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================== 加入购物车成功提示弹窗（初始隐藏） ===================== -->
+    <div id="cartTipsModal" class="modal tips-modal hidden">
+        <div class="modal-content tips-content">
+            <div class="success-icon">
+                <i class="icon icon-check"></i>
+            </div>
+            <h4 class="tips-title">操作成功</h4>
+            <p class="tips-desc">商品已成功加入购物车！</p>
+            <button id="closeTipsModal" class="confirm-btn">确定</button>
+        </div>
+    </div>
+
+    <!-- 引入本地JS -->
+    <script src="js/main.js"></script>
+</body>
+</html>
